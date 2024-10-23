@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Input, Button, message, Modal } from "antd";
 import { LinkOutlined } from "@ant-design/icons";
+import { RiLinkUnlink } from "react-icons/ri";
 import URLTable from "./Components/URLtable";
 import QRCodeModal from "./Components/QRcodeModal";
 import { urlService } from "./Services/urlService";
-import { apiEndPoint} from "./Const/api";
+import { apiEndPoint,devEndPoint} from "./Const/api";
 import "./App.css";
 
 const { Header, Content } = Layout;
@@ -76,7 +77,7 @@ const App = () => {
 
   const handleDeleteAll = async () => {
     Modal.confirm({
-      title: "Are you sure you want to delete all URLs?",
+      title: "คุณต้องการลบประวัติของคุณทั้งหมดหรือไม่ ?",
       onOk: async () => {
         try {
           const success = await urlService.deleteAllUrls();
@@ -130,7 +131,7 @@ const App = () => {
     <Layout className="min-vh-100 bg-light">
       <Header className="bg-danger py-3 text-white">
         <div className="d-flex align-items-center justify-content-center">
-          <LinkOutlined className="text-white me-2" />
+          <RiLinkUnlink className="text-white me-2" size={35}/>
           <h1 className="display-6 mb-0 text-center adjust-heading">
             URL Shortener
           </h1>
@@ -174,7 +175,7 @@ const App = () => {
           {urls.length > 0 && (
             <div className="text-end mt-4">
               <button className="btn btn-danger" onClick={handleDeleteAll}>
-                Delete All URLs
+                ลบประวัติทั้งหมด
               </button>
             </div>
           )}

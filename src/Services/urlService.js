@@ -1,4 +1,4 @@
-import { apiEndPoint } from "../Const/api";
+import { apiEndPoint ,devEndPoint } from "../Const/api";
 const API_BASE_URL = `${apiEndPoint}`;
 
 export const urlService = {
@@ -19,6 +19,7 @@ export const urlService = {
           fullUrl: row.cells[0]?.textContent || '',
           shortUrl: (row.cells[1]?.textContent || '').trim(),
           clicks: parseInt(row.cells[2]?.textContent || '0', 10),
+          userIp: row.cells[3]?.textContent || '',
         }))
         .filter((url) => url.fullUrl && url.shortUrl);
     } catch (error) {
@@ -87,3 +88,4 @@ export const urlService = {
     }
   },
 };
+

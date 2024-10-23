@@ -6,7 +6,8 @@ import {
   DownloadOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import { apiEndPoint, apiQrcodeEndPoint } from "../Const/api";
+import { FaLink } from "react-icons/fa6";
+import { apiEndPoint, apiQrcodeEndPoint, devEndPoint } from "../Const/api";
 
 const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -57,9 +58,14 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
           </div>
           <div>
             <b className="font-extrabold text-gray-600">Short URL : </b>
-            <span className="text-blue-500">
+            <a
+              href={`${apiEndPoint}/${record.shortUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
               {`${apiEndPoint}/${record.shortUrl}`}
-            </span>
+            </a>
           </div>
         </div>
       ),
@@ -96,6 +102,16 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
       ),
     },
     {
+      title: "ip",
+      dataIndex: "userIp",
+      key: "userIp",
+      width: "10%",
+      align: "center",
+      render: (userIp) => (
+        <span className="px-3 py-1 bg-blue-500  rounded-full">{userIp}</span>
+      ),
+    },
+    {
       title: "Actions",
       key: "actions",
       width: "20%",
@@ -113,7 +129,7 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
               title="Copy short URL"
             />
             <Button
-              icon={<GlobalOutlined />}
+              icon={<FaLink size={18} />}
               onClick={() => onOpen(record.shortUrl)}
               title="Open URL"
             />
