@@ -4,10 +4,11 @@ import { LinkOutlined } from "@ant-design/icons";
 import URLTable from "./Components/URLtable";
 import QRCodeModal from "./Components/QRcodeModal";
 import { urlService } from "./Services/urlService";
+import { apiEndPoint} from "./Const/api";
 import "./App.css";
 
 const { Header, Content } = Layout;
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = `${apiEndPoint}`;
 
 const App = () => {
   const [urls, setUrls] = useState([]);

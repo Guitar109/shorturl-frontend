@@ -6,17 +6,18 @@ import {
   DownloadOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import { apiEndPoint, apiQrcodeEndPoint } from "../Const/api";
 
 const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedQR, setSelectedQR] = useState({ url: '', shortUrl: '' });
+  const [selectedQR, setSelectedQR] = useState({ url: "", shortUrl: "" });
 
   const downloadQR = async (qrUrl, shortUrl) => {
     try {
       const response = await fetch(qrUrl);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
       link.download = `qr-${shortUrl}.png`;
       document.body.appendChild(link);
@@ -24,13 +25,13 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error downloading QR code:', error);
+      console.error("Error downloading QR code:", error);
     }
   };
 
   const showQRModal = (shortUrl) => {
-    const modalQrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
-      `http://localhost:5000/${shortUrl}`
+    const modalQrUrl = `${apiQrcodeEndPoint}/?data=${encodeURIComponent(
+      `${apiEndPoint}/${shortUrl}`
     )}&size=512x512`;
     setSelectedQR({ url: modalQrUrl, shortUrl });
     setModalVisible(true);
@@ -44,7 +45,7 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
       render: (_, record) => (
         <div className="flex flex-col space-y-2">
           <div>
-            <span className="font-semibold text-gray-600">Full URL: </span>
+            <b className="font-extrabold text-gray-600">Full URL : </b>
             <a
               href={record.fullUrl}
               target="_blank"
@@ -55,9 +56,9 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
             </a>
           </div>
           <div>
-            <span className="font-semibold text-gray-600">Short URL: </span>
+            <b className="font-extrabold text-gray-600">Short URL : </b>
             <span className="text-blue-500">
-              {`http://localhost:5000/${record.shortUrl}`}
+              {`${apiEndPoint}/${record.shortUrl}`}
             </span>
           </div>
         </div>
@@ -69,8 +70,8 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
       width: "20%",
       align: "center",
       render: (_, record) => {
-        const thumbnailQrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
-          `http://localhost:5000/${record.shortUrl}`
+        const thumbnailQrUrl = `${apiQrcodeEndPoint}/?data=${encodeURIComponent(
+          `${apiEndPoint}/${record.shortUrl}`
         )}&size=128x128`;
         return (
           <div className="flex flex-col items-center gap-2">
@@ -91,9 +92,7 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
       width: "10%",
       align: "center",
       render: (clicks) => (
-        <span className="px-3 py-1 bg-blue-500  rounded-full">
-          {clicks}
-        </span>
+        <span className="px-3 py-1 bg-blue-500  rounded-full">{clicks}</span>
       ),
     },
     {
@@ -102,8 +101,8 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
       width: "20%",
       align: "center",
       render: (_, record) => {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
-          `http://localhost:5000/${record.shortUrl}`
+        const qrUrl = `${apiQrcodeEndPoint}/?data=${encodeURIComponent(
+          `${apiEndPoint}/${record.shortUrl}`
         )}&size=512x512`;
 
         return (
@@ -161,7 +160,7 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
           </Button>,
           <Button key="close" onClick={() => setModalVisible(false)}>
             Close
-          </Button>
+          </Button>,
         ]}
         title={`QR Code for ${selectedQR.shortUrl}`}
         centered
