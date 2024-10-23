@@ -1,11 +1,12 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
+import { apiEndPoint} from "../Const/api";
 
 const QRCodeModal = ({ isOpen, onClose, url, onDownload }) => {
   if (!url) return null;
 
-  const fullUrl = `http://localhost:5000/${url.shortUrl.trim()}`;
+  const fullUrl = `${apiEndPoint}/${url.shortUrl.trim()}`;
   const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(fullUrl)}&size=128x128`; // Smaller size
 
   const downloadQR = () => {
