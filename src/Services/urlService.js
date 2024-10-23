@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://localhost:5000';
+import { apiEndPoint } from "../Const/api";
+const API_BASE_URL = `${apiEndPoint}`;
 
 export const urlService = {
   fetchUrls: async () => {
