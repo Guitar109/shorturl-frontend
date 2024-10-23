@@ -175,7 +175,7 @@ const App = () => {
           {urls.length > 0 && (
             <div className="text-end mt-4">
               <button className="btn btn-danger" onClick={handleDeleteAll}>
-                ลบประวัติทั้งหมด
+                Delete all url
               </button>
             </div>
           )}
