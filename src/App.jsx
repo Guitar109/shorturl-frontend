@@ -5,7 +5,7 @@ import { RiLinkUnlink } from "react-icons/ri";
 import URLTable from "./Components/URLtable";
 import QRCodeModal from "./Components/QRcodeModal";
 import { urlService } from "./Services/urlService";
-import { apiEndPoint,devEndPoint} from "./Const/api";
+import { apiEndPoint, devEndPoint } from "./Const/api";
 import "./App.css";
 
 const { Header, Content } = Layout;
@@ -17,18 +17,22 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUrl, setSelectedUrl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const urlsData = await urlService.fetchUrls();
       setUrls(urlsData);
     } catch (error) {
       console.error("Fetch error:", error);
       message.error("Error loading URLs");
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -131,7 +135,7 @@ const App = () => {
     <Layout className="min-vh-100 bg-light">
       <Header className="bg-danger py-3 text-white">
         <div className="d-flex align-items-center justify-content-center">
-          <RiLinkUnlink className="text-white me-2" size={35}/>
+          <RiLinkUnlink className="text-white me-2" size={35} />
           <h1 className="display-6 mb-0 text-center adjust-heading">
             URL Shortener
           </h1>
@@ -164,6 +168,7 @@ const App = () => {
 
           <URLTable
             urls={urls}
+            loading={loading}
             onDelete={handleDelete}
             onCopy={copyToClipboard}
             onOpen={handleOpenUrl}

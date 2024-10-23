@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Table, Button, Space, Modal } from "antd";
+import { Table, Button, Space, Modal, Flex, Spin } from "antd";
 import {
   CopyOutlined,
-  GlobalOutlined,
   DownloadOutlined,
   DeleteOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import { FaLink } from "react-icons/fa6";
 import { apiEndPoint, apiQrcodeEndPoint, devEndPoint } from "../Const/api";
 
-const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
+const URLTable = ({ urls, onDelete, onCopy, onOpen, loading }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedQR, setSelectedQR] = useState({ url: "", shortUrl: "" });
 
@@ -153,15 +153,17 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen }) => {
   return (
     <div className="overflow-x-auto">
       <Table
+        loading={loading}
         dataSource={urls.map((url, index) => ({ ...url, key: index }))}
         columns={columns}
         pagination={false}
         className="min-w-full"
         locale={{
-          emptyText: "No URLs shortened yet. Try shortening one above!",
+          emptyText: `${
+            !loading ? "No URLs shortened yet. Try shortening one above!" : ""
+          }`,
         }}
       />
-
       <Modal
         open={modalVisible}
         onCancel={() => setModalVisible(false)}
