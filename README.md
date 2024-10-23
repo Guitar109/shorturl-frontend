@@ -1,8 +1,16 @@
-# React + Vite
+# ShortURL Project
+ShortURL is a URL shortening service built with React and Vite.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies
+- **Frontend**: React
+- **Build Tool**: Vite
+- **Styling**: CSS,Bootrap,AntD
+- **Version Control**: Git
 
-Currently, two official plugins are available:
+### Steps to Install
+1.cd shorturl-frontend 
+2.npm install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Run Project
+npm run dev
+
