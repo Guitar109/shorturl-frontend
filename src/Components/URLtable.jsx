@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Table, Button, Space, Modal, Flex, Spin } from "antd";
+import { Table, Button, Space, Modal } from "antd";
 import {
   CopyOutlined,
   DownloadOutlined,
   DeleteOutlined,
-  LoadingOutlined,
 } from "@ant-design/icons";
 import { FaLink } from "react-icons/fa6";
 import { apiEndPoint, apiQrcodeEndPoint, devEndPoint } from "../Const/api";
@@ -64,7 +63,8 @@ const URLTable = ({ urls, onDelete, onCopy, onOpen, loading }) => {
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
-              {`${apiEndPoint}/${record.shortUrl}`}
+              {`shorturl/${record.shortUrl}`}
+              {/* {`${apiEndPoint}/${record.shortUrl}`} */}
             </a>
           </div>
         </div>

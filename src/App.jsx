@@ -9,7 +9,6 @@ import { apiEndPoint, devEndPoint } from "./Const/api";
 import "./App.css";
 
 const { Header, Content } = Layout;
-const API_BASE_URL = `${apiEndPoint}`;
 
 const App = () => {
   const [urls, setUrls] = useState([]);
@@ -81,7 +80,7 @@ const App = () => {
 
   const handleDeleteAll = async () => {
     Modal.confirm({
-      title: "คุณต้องการลบประวัติของคุณทั้งหมดหรือไม่ ?",
+      title: "Do you want to delete all your Url history ?",
       onOk: async () => {
         try {
           const success = await urlService.deleteAllUrls();
@@ -98,7 +97,7 @@ const App = () => {
 
   const copyToClipboard = async (shortUrl) => {
     try {
-      await navigator.clipboard.writeText(`${API_BASE_URL}/${shortUrl}`);
+      await navigator.clipboard.writeText(`${apiEndPoint}/${shortUrl}`);
       message.success("Copied to clipboard! 📋");
     } catch (error) {
       console.error("Copy error:", error);
@@ -107,7 +106,7 @@ const App = () => {
   };
 
   const handleOpenUrl = (shortUrl) => {
-    window.open(`${API_BASE_URL}/${shortUrl}`, "_blank");
+    window.open(`${apiEndPoint}/${shortUrl}`, "_blank");
   };
 
   const downloadQRCode = (shortUrl) => {
